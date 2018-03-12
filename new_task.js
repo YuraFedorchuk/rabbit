@@ -10,8 +10,17 @@ async function init() {
 
         const q = 'task_queue';
         const message = 'Hello world!';
-
+        
+        /**
+         * { durable: true }
+         * if rabbitmq crashes it will not forget the queue
+         */
         await channel.assertQueue(q, { durable: true });
+
+        /**
+         * { persistant: true }
+         * if rabbitmq crashs it will not forget the message 
+         */
         await channel.sendToQueue(q, Buffer.from(message), { persistent: true });
 
         console.log(` [x] Sent message: ${message}`);

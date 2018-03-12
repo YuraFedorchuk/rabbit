@@ -12,6 +12,11 @@ async function init() {
         const q = 'task_queue';
 
         await channel.assertQueue(q, { durable: true });
+        
+        /**
+         * channel.prefetch(1)
+         * not to give more than one message to a worker at a time
+         */
         await channel.prefetch(1);
         
         console.log(` [*] Waiting for messages in ${q}. To exit press CTRL+C`);
@@ -20,9 +25,20 @@ async function init() {
             console.log(` [x] Received: ${msg.content.toString()}`);
 
             setTimeout(() => { 
-                console.log('Done'); 
+                console.log('Done');
+                
+                /**
+                 * channel.ack(message)
+                 * confirmation for rabbit from the consumer that the
+                 * message is delivered
+                 */
                 channel.ack(msg); 
             }, 3000);
+
+        /**
+         * noAck: false
+         * use acknowledgments (that is confirmation)
+         */
         }, { noAck: false });
 
     } catch(e) {

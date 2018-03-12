@@ -1,0 +1,5 @@
+[33m[nodemon] 1.17.1[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `node subscriber.js`[39m
+[32m[nodemon] clean exit - waiting for changes before restart[39m
