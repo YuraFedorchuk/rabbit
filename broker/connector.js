@@ -10,9 +10,9 @@ class RabbitConnector {
 
         await this.start();
     }
-    async start(endpoint) {
-        this.conn = await amqp.connect(endpoint);
-        logger.info(` [x] RabbitMQ connection on ${endpoint} established`);
+    async start() {
+        this.conn = await amqp.connect(this.endpoint);
+        logger.info(` [x] RabbitMQ connection on ${this.endpoint} established`);
     }
     async stop() {
         await this.conn.close();
